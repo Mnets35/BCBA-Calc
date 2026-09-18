@@ -117,12 +117,16 @@
     <div class="total-card">
       <div class="label">Estimated Annual Comp</div>
       <div class="grand-total" id="total-compensation">$0</div>
-      <div class="subtext" id="breakdown-text">Base + Commission + Add'l Benefits & Comp</div>
+      <div class="subtext">
+        Base: <span id="sub-annual-base">$0</span> | Comm: <span id="sub-annual-comm">$0</span> | Add'l Benefits & Comp: <span id="sub-annual-perks">$0</span>
+      </div>
     </div>
     <div class="total-card">
       <div class="label">Estimated Monthly Comp</div>
       <div class="grand-total" id="monthly-compensation">$0</div>
-      <div class="subtext" id="monthly-breakdown-text">Avg Base + Comm / Mo</div>
+      <div class="subtext">
+        Base: <span id="sub-monthly-base">$0</span> | Comm: <span id="sub-monthly-comm">$0</span>
+      </div>
     </div>
   </div>
 
@@ -136,17 +140,17 @@
   <!-- Dynamic Content Panels -->
   <div style="margin-top: 1.5rem;">
     <div class="info-box qual-box">
-      <h3> Qualifications & Parameters</h3>
+      <h3>Qualifications & Parameters</h3>
       <div id="content-qual"></div>
     </div>
 
     <div class="info-box exp-box">
-      <h3> Expectations & Restrictions</h3>
+      <h3>Expectations & Restrictions</h3>
       <div id="content-exp"></div>
     </div>
 
     <div class="info-box benefits-box">
-      <h3> Additional Benefits & Compensation Package</h3>
+      <h3>Additional Benefits & Compensation Package</h3>
       <div id="content-benefits"></div>
     </div>
   </div>
@@ -284,9 +288,9 @@
     
     const hourlyCommissionRate = data.unitRate * 4;
     
-    document.getElementById("slider-display").innerHTML = weeklyHours + " hours";
-    document.getElementById("disp-base").innerHTML = "$" + data.base.toLocaleString();
-    document.getElementById("disp-unit-rate").innerHTML = "$" + data.unitRate.toFixed(2) + " / unit";
+    document.getElementById("slider-display").textContent = weeklyHours + " hours";
+    document.getElementById("disp-base").textContent = "$" + data.base.toLocaleString();
+    document.getElementById("disp-unit-rate").textContent = "$" + data.unitRate.toFixed(2) + " / unit";
     
     let bonusHours = weeklyHours - 20;
     if (bonusHours < 0) bonusHours = 0;
@@ -301,13 +305,17 @@
     const employerTaxesAndBenefits = ((data.base + annualCommission) * 0.10) + 1800;
     const grandTotalPackage = totalAnnualComp + employerTaxesAndBenefits;
 
-    document.getElementById("total-compensation").innerHTML = "$" + Math.round(totalAnnualComp).toLocaleString();
-    document.getElementById("breakdown-text").innerHTML = "Base: $" + data.base.toLocaleString() + " \vert{} Comm: $" + Math.round(annualCommission).toLocaleString() + " | Add'l Benefits & Comp: $" + Math.round(data.benefitsValue).toLocaleString();
-    
-    document.getElementById("monthly-compensation").innerHTML = "$" + Math.round(totalMonthlyComp).toLocaleString();
-    document.getElementById("monthly-breakdown-text").innerHTML = "Base: $" + Math.round(baseMonthly).toLocaleString() + " \vert{} Comm: $" + Math.round(commissionMonthly).toLocaleString();
-    
-    document.getElementById("package-compensation").innerHTML = "$" + Math.round(grandTotalPackage).toLocaleString();
+    document.getElementById("total-compensation").textContent = "$" + Math.round(totalAnnualComp).toLocaleString();
+    document.getElementById("monthly-compensation").textContent = "$" + Math.round(totalMonthlyComp).toLocaleString();
+    document.getElementById("package-compensation").textContent = "$" + Math.round(grandTotalPackage).toLocaleString();
+
+    // Updating subtext spans cleanly without touching static text strings
+    document.getElementById("sub-annual-base").textContent = "$" + data.base.toLocaleString();
+    document.getElementById("sub-annual-comm").textContent = "$" + Math.round(annualCommission).toLocaleString();
+    document.getElementById("sub-annual-perks").textContent = "$" + Math.round(data.benefitsValue).toLocaleString();
+
+    document.getElementById("sub-monthly-base").textContent = "$" + Math.round(baseMonthly).toLocaleString();
+    document.getElementById("sub-monthly-comm").textContent = "$" + Math.round(commissionMonthly).toLocaleString();
   }
 
   setCategory('core');
