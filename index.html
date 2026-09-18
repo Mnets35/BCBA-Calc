@@ -85,7 +85,6 @@
 <body>
 <div class="container">
   <header>
-    <!-- Referencing GitHub-hosted Logo.svg -->
     <img src="Logo.svg" alt="Not Your Everyday Therapy Services Logo" class="logo-img">
     <p>BCBA Compensation and Category Overview</p>
   </header>
@@ -285,9 +284,9 @@
     
     const hourlyCommissionRate = data.unitRate * 4;
     
-    document.getElementById("slider-display").textContent = weeklyHours + " hours";
-    document.getElementById("disp-base").textContent = "$" + data.base.toLocaleString();
-    document.getElementById("disp-unit-rate").textContent = "$" + data.unitRate.toFixed(2) + " / unit";
+    document.getElementById("slider-display").innerHTML = weeklyHours + " hours";
+    document.getElementById("disp-base").innerHTML = "$" + data.base.toLocaleString();
+    document.getElementById("disp-unit-rate").innerHTML = "$" + data.unitRate.toFixed(2) + " / unit";
     
     let bonusHours = weeklyHours - 20;
     if (bonusHours < 0) bonusHours = 0;
@@ -302,13 +301,13 @@
     const employerTaxesAndBenefits = ((data.base + annualCommission) * 0.10) + 1800;
     const grandTotalPackage = totalAnnualComp + employerTaxesAndBenefits;
 
-    document.getElementById("total-compensation").textContent = "$" + Math.round(totalAnnualComp).toLocaleString();
-    document.getElementById("breakdown-text").textContent = "Base: $" + data.base.toLocaleString() + " \vert{} Comm: $" + Math.round(annualCommission).toLocaleString() + " | Add'l Benefits & Comp: $" + Math.round(data.benefitsValue).toLocaleString();
+    document.getElementById("total-compensation").innerHTML = "$" + Math.round(totalAnnualComp).toLocaleString();
+    document.getElementById("breakdown-text").innerHTML = "Base: $" + data.base.toLocaleString() + " \vert{} Comm: $" + Math.round(annualCommission).toLocaleString() + " | Add'l Benefits & Comp: $" + Math.round(data.benefitsValue).toLocaleString();
     
-    document.getElementById("monthly-compensation").textContent = "$" + Math.round(totalMonthlyComp).toLocaleString();
-    document.getElementById("monthly-breakdown-text").textContent = "Base: $" + Math.round(baseMonthly).toLocaleString() + " \vert{} Comm: $" + Math.round(commissionMonthly).toLocaleString();
+    document.getElementById("monthly-compensation").innerHTML = "$" + Math.round(totalMonthlyComp).toLocaleString();
+    document.getElementById("monthly-breakdown-text").innerHTML = "Base: $" + Math.round(baseMonthly).toLocaleString() + " \vert{} Comm: $" + Math.round(commissionMonthly).toLocaleString();
     
-    document.getElementById("package-compensation").textContent = "$" + Math.round(grandTotalPackage).toLocaleString();
+    document.getElementById("package-compensation").innerHTML = "$" + Math.round(grandTotalPackage).toLocaleString();
   }
 
   setCategory('core');
